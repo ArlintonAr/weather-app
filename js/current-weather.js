@@ -1,24 +1,17 @@
 import weather from "../data/current-weather.js";
-
+import { formatDate } from "./utils/format-data.js";
 
 function setCurrentCity($el,city){
     $el.textContent=city
 }
 
 
-const config={
-    day:"numeric",
-    weekday:"long",
-    month:"long"
-}
 
 function setCurrentDate($el){
     const date=new Date()
-    const formattedDate=new Intl.DateTimeFormat('es',config).format(date); 
-
+    const formattedDate=formatDate(date)
     $el.textContent=formattedDate;
 }
-
 
 function configCurrentWeather(){
     //loader
@@ -28,8 +21,7 @@ function configCurrentWeather(){
     //city
     const $currentWeatherCity=document.querySelector('#current-weather-city');
     const city=weather.name;
-    setCurrentCity($currentWeatherCity,city)
-    
+    setCurrentCity($currentWeatherCity,city)    
     //temp
     //backgraund
 }
