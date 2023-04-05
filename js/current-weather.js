@@ -5,6 +5,8 @@ import { getLatLon } from "./geolocation.js";
 import { getCurrentWeather } from "./services/weather.js";
 
 
+
+
 function solarStatus(sunriseTime, sunsetTime) {
     const currentTime = new Date().getHours();
     const sunriseHours = sunriseTime.getHours();
@@ -35,8 +37,15 @@ function setCurrentDate($el) {
     $el.textContent = formattedDate;
 }
 
+function showCurrentWeather($app,$loader){
+    $app.hidden=false
+    $loader.hidden=true
+} 
 function configCurrentWeather(weather) {
+    const $app = document.querySelector('#app');
+    const $loading = document.querySelector('#loading');
     //loader
+    showCurrentWeather($app,$loading);
     //date
     const $currentWeatherDate = document.querySelector('#current-weather-date');
     setCurrentDate($currentWeatherDate)
@@ -54,7 +63,7 @@ function configCurrentWeather(weather) {
     //backgraund
     const sunriseTime = new Date(weather.sys.sunrise * 1000)
     const sunsetTime = new Date(weather.sys.sunset * 1000)
-    const $app = document.querySelector('#app');
+ 
     const conditionCode = String(weather.weather[0].id).charAt(0)
 
     setBackground($app, conditionCode, solarStatus(sunriseTime, sunsetTime))
