@@ -14,19 +14,34 @@ const week = [
     'Sabado'
 ]
 function nextDay(day) {
-    
-    if(day===6){
+
+    if (day === 6) {
         return 0;
     }
     return day + 1
 }
 $tablist.forEach(($tab, index) => {
-    if(index===0){
-        $tab.textContent='Hoy'
+    $tab.addEventListener("click", handleSelectTabClick)
+    if (index === 0) {
+        $tab.textContent = 'Hoy'
         weekday = nextDay(weekday)
-    return false
+        return false
     }
     $tab.textContent = week[weekday];
     weekday = nextDay(weekday);
-    
+
 })
+
+//funcion para el evento tab
+function handleSelectTabClick(event) {
+    const $tabSelected = event.target
+    const $tabActive = document.querySelector('.tab[aria-selected="true"]')
+    $tabActive.removeAttribute('aria-selected')
+    $tabSelected.setAttribute('aria-selected', true)
+
+    const id = $tabSelected.id
+    const $tabPanel = document.querySelector(`[aria-labelledby=${id}]`)
+    const $tabPanelSelected = document.querySelector(`.tabPanel:not([hidden])`)
+    $tabPanel.hidden = false;
+    $tabPanelSelected.hidden = true;
+}
