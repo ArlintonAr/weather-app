@@ -29,9 +29,7 @@ export function getCurrentPosition(options = defaultOptions) {
         }, () => {
             reject('No hemos podido obtener tu ubicación')
         }, options)
-
     })
-
 }
 
 export async function getLatLon(options = defaultOptions) {
